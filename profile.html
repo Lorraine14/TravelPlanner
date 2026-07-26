@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TripCraft</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        /* ================================================================
+           PROFILE PAGE - SPECIFIC STYLES
+           ================================================================ */
+
+        .profile-page {
+            min-height: 100vh;
+            padding: 120px 0 60px;
+            background: linear-gradient(145deg, #FDF8F0 0%, #F5EDE5 45%, #EDE5DD 100%);
+            position: relative;
+        }
+
+        .profile-page::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 15% 25%, rgba(255, 107, 107, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 85% 75%, rgba(78, 205, 196, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .profile-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 28px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ================================================================
+           PROFILE HEADER
+           ================================================================ */
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .profile-header .header-icon {
+            font-size: 3rem;
+            color: var(--coral);
+            display: block;
+            margin-bottom: 4px;
+            transform: rotate(-6deg);
+        }
+
+        .profile-header h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 3.6rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            line-height: 1.1;
+        }
+
+        .profile-header h1 .highlight {
+            color: var(--coral);
+            position: relative;
+        }
+
+        .profile-header h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: var(--mustard);
+            opacity: 0.3;
+            border-radius: 4px;
+            transform: rotate(-1deg);
+        }
+
+        .profile-header p {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: #7A7A8E;
+            margin-top: 4px;
+        }
+
+        /* ================================================================
+           PROFILE CARD
+           ================================================================ */
+
+        .profile-card {
+            background: #fff;
+            border: 4px solid var(--charcoal);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(44, 44, 58, 0.12);
+            transform: rotate(-0.5deg);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .profile-card:hover {
+            transform: rotate(0deg);
+        }
+
+        /* Torn tape decoration */
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 70px;
+            height: 20px;
+            background: rgba(255, 217, 61, 0.4);
+            border-radius: 2px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            z-index: 5;
+        }
+
+        .profile-card-inner {
+            padding: 40px;
+        }
+
+        /* ================================================================
+           PROFILE AVATAR
+           ================================================================ */
+
+        .profile-avatar-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 3px dashed rgba(44, 44, 58, 0.10);
+            flex-wrap: wrap;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--charcoal);
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: var(--coral);
+            position: relative;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-avatar .avatar-initials {
+            font-family: 'Caveat', cursive;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--charcoal);
+        }
+
+        .profile-avatar .avatar-edit-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--coral);
+            border: 3px solid var(--charcoal);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            color: #fff;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-avatar .avatar-edit-btn:hover {
+            transform: scale(1.1);
+            background: var(--coral-dark);
+        }
+
+        .profile-name-info h2 {
+            font-family: 'Caveat', cursive;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        .profile-name-info .username {
+            font-size: 0.9rem;
+            color: #7A7A8E;
+            display: block;
+        }
+
+        .profile-name-info .username i {
+            color: var(--coral);
+            margin-right: 4px;
+        }
+
+        .profile-name-info .member-since {
+            font-size: 0.75rem;
+            color: #9A9AAE;
+            margin-top: 2px;
+            display: block;
+        }
+
+        .profile-name-info .member-since i {
+            margin-right: 4px;
+        }
+
+        /* ================================================================
+           PROFILE DETAILS FORM
+           ================================================================ */
+
+        .profile-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .profile-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .profile-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .profile-form-group label {
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #7A7A8E;
+        }
+
+        .profile-form-group label i {
+            color: var(--coral);
+            margin-right: 6px;
+            width: 16px;
+        }
+
+        .profile-form-group input,
+        .profile-form-group textarea {
+            padding: 12px 16px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.95rem;
+            border: 3px solid var(--charcoal);
+            border-radius: 4px;
+            background: var(--cream);
+            color: var(--charcoal);
+            transition: all 0.3s ease;
+            outline: none;
+            width: 100%;
+        }
+
+        .profile-form-group input:focus,
+        .profile-form-group textarea:focus {
+            border-color: var(--coral);
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.12);
+            background: #fff;
+        }
+
+        .profile-form-group input:disabled,
+        .profile-form-group textarea:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .profile-form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+            line-height: 1.6;
+        }
+
+        .profile-form-group .field-hint {
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        .profile-form-group .field-hint i {
+            margin-right: 4px;
+        }
+
+        /* ================================================================
+           PROFILE BUTTONS
+           ================================================================ */
+
+        .profile-actions {
+            display: flex;
+            gap: 14px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            padding-top: 20px;
+            border-top: 3px dashed rgba(44, 44, 58, 0.10);
+        }
+
+        .profile-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 28px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            font-family: 'Nunito', sans-serif;
+            color: var(--charcoal);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            transform: rotate(-0.5deg);
+        }
+
+        .profile-btn::before {
+            content: '';
+            position: absolute;
+            inset: -4px -8px;
+            border: 3px solid var(--charcoal);
+            clip-path: polygon(0% 0%, 97% 2%, 100% 6%, 98% 94%, 95% 98%, 3% 100%, 0% 95%, 2% 4%);
+            transition: all 0.3s ease;
+        }
+
+        .profile-btn::after {
+            content: '';
+            position: absolute;
+            inset: -2px -5px;
+            border: 2px solid var(--charcoal);
+            clip-path: polygon(2% 4%, 99% 0%, 96% 98%, 0% 96%);
+            opacity: 0.3;
+            transition: all 0.3s ease;
+        }
+
+        .profile-btn:hover {
+            transform: rotate(0deg) translateY(-3px) scale(1.03);
+        }
+
+        .profile-btn:hover::before {
+            border-color: var(--coral);
+            clip-path: polygon(0% 0%, 98% 2%, 100% 8%, 96% 96%, 92% 100%, 2% 98%, 0% 92%, 2% 2%);
+        }
+
+        .profile-btn:hover::after {
+            border-color: var(--coral);
+            opacity: 0.6;
+        }
+
+        .profile-btn i {
+            font-size: 0.9rem;
+        }
+
+        .profile-btn.primary:hover::before {
+            border-color: var(--sky);
+        }
+        .profile-btn.primary:hover::after {
+            border-color: var(--sky);
+        }
+
+        .profile-btn.danger:hover::before {
+            border-color: var(--coral);
+        }
+        .profile-btn.danger:hover::after {
+            border-color: var(--coral);
+        }
+
+        .profile-btn.danger i {
+            color: var(--coral);
+        }
+
+        .profile-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .profile-btn:disabled::before {
+            border-color: #ccc !important;
+        }
+        .profile-btn:disabled::after {
+            border-color: #ccc !important;
+        }
+
+        /* ================================================================
+           SUCCESS / ERROR MESSAGES
+           ================================================================ */
+
+        .profile-message {
+            padding: 12px 18px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: none;
+            margin-top: 4px;
+        }
+
+        .profile-message.show {
+            display: block;
+        }
+
+        .profile-message.success {
+            background: #E8F5E9;
+            border: 2px solid #4CAF50;
+            color: #2E7D32;
+        }
+
+        .profile-message.success i {
+            margin-right: 8px;
+        }
+
+        .profile-message.error {
+            background: #FEE;
+            border: 2px solid var(--coral);
+            color: var(--coral);
+        }
+
+        .profile-message.error i {
+            margin-right: 8px;
+        }
+
+        /* ================================================================
+           RESPONSIVE
+           ================================================================ */
+
+        @media (max-width: 768px) {
+            .profile-page {
+                padding: 100px 0 40px;
+            }
+
+            .profile-header h1 {
+                font-size: 2.6rem;
+            }
+
+            .profile-card-inner {
+                padding: 28px 20px;
+            }
+
+            .profile-avatar-section {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+
+            .profile-avatar {
+                width: 100px;
+                height: 100px;
+                font-size: 2.8rem;
+            }
+
+            .profile-avatar .avatar-initials {
+                font-size: 2.8rem;
+            }
+
+            .profile-name-info h2 {
+                font-size: 2.2rem;
+            }
+
+            .profile-form-row {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+            }
+
+            .profile-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 20px;
+            }
+
+            .profile-card::before {
+                width: 50px;
+                height: 16px;
+                top: -10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .profile-header .header-icon {
+                font-size: 2.2rem;
+            }
+
+            .profile-card-inner {
+                padding: 20px 16px;
+            }
+
+            .profile-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 2.2rem;
+            }
+
+            .profile-avatar .avatar-initials {
+                font-size: 2.2rem;
+            }
+
+            .profile-avatar .avatar-edit-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 0.7rem;
+            }
+
+            .profile-name-info h2 {
+                font-size: 1.8rem;
+            }
+
+            .profile-form-group input,
+            .profile-form-group textarea {
+                font-size: 0.85rem;
+                padding: 10px 14px;
+            }
+        }
+
+        /* ================================================================
+           NAVBAR OVERRIDE FOR PROFILE PAGE
+           ================================================================ */
+
+        .profile-page .navbar {
+            background: rgba(253, 248, 240, 0.95);
+        }
+
+        /* ================================================================
+           EDIT MODE TOGGLE
+           ================================================================ */
+
+        .profile-edit-mode .profile-form-group input,
+        .profile-edit-mode .profile-form-group textarea {
+            background: #fff;
+            border-color: var(--coral);
+        }
+
+        .profile-edit-mode .profile-form-group input:disabled,
+        .profile-edit-mode .profile-form-group textarea:disabled {
+            background: var(--cream);
+            border-color: var(--charcoal);
+        }
+
+        .profile-view-mode .profile-form-group input,
+        .profile-view-mode .profile-form-group textarea {
+            background: var(--cream);
+            border-color: var(--charcoal);
+        }
+
+        .profile-view-mode .profile-form-group input:focus,
+        .profile-view-mode .profile-form-group textarea:focus {
+            border-color: var(--charcoal);
+            box-shadow: none;
+        }
+
+        /* Password change section */
+        .password-change-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 3px dashed rgba(44, 44, 58, 0.10);
+        }
+
+        .password-change-section h4 {
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            color: var(--charcoal);
+            margin: 0 0 14px 0;
+        }
+
+        .password-change-section .profile-form-row {
+            margin-bottom: 0;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .password-toggle input {
+            width: 100%;
+            padding-right: 48px;
+        }
+
+        .password-toggle .toggle-eye {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 4px;
+        }
+
+        .password-toggle .toggle-eye:hover {
+            color: var(--charcoal);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================================
+    NAVBAR
+    ================================================================ -->
+
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">
+            <i class="fas fa-paper-plane"></i> TripCraft
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Explore</a></li>
+            <li><a href="index.html#why">About</a></li>
+            <li><a href="index.html#footer">Contact</a></li>
+            <li class="nav-auth" id="navAuth">
+                <!-- DYNAMICALLY UPDATED BY JAVASCRIPT -->
+            </li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ================================================================
+    PROFILE SECTION
+    ================================================================ -->
+
+    <section class="profile-page">
+        <div class="profile-container">
+            <div class="profile-header">
+                <span class="header-icon"><i class="fas fa-user-circle"></i></span>
+                <h1>My <span class="highlight">Profile</span></h1>
+                <p>Manage your account information and preferences</p>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-card-inner">
+                    
+                    <!-- Success / Error Messages -->
+                    <div class="profile-message success" id="profileSuccess">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="successMessage">Profile updated successfully!</span>
+                    </div>
+                    <div class="profile-message error" id="profileError">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="errorMessage">An error occurred. Please try again.</span>
+                    </div>
+
+                    <!-- Avatar Section -->
+                    <div class="profile-avatar-section">
+                        <div class="profile-avatar" id="profileAvatar">
+                            <span class="avatar-initials" id="avatarInitials">JD</span>
+                            <button class="avatar-edit-btn" id="avatarEditBtn" title="Change avatar">
+                                <i class="fas fa-camera"></i>
+                            </button>
+                        </div>
+                        <div class="profile-name-info">
+                            <h2 id="displayName">John Doe</h2>
+                            <span class="username"><i class="fas fa-user"></i> <span id="displayUsername">@johndoe</span></span>
+                            <span class="member-since"><i class="fas fa-calendar-alt"></i> Member since <span id="memberSince">January 2026</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Profile Form -->
+                    <form class="profile-form" id="profileForm" novalidate>
+                        <!-- View/Edit mode indicator -->
+                        <input type="hidden" id="editMode" value="false" />
+
+                        <div class="profile-form-row">
+                            <div class="profile-form-group">
+                                <label for="profileFirstname"><i class="fas fa-user"></i> First Name</label>
+                                <input 
+                                    type="text" 
+                                    id="profileFirstname" 
+                                    placeholder="First name" 
+                                    disabled
+                                />
+                            </div>
+                            <div class="profile-form-group">
+                                <label for="profileLastname"><i class="fas fa-user"></i> Last Name</label>
+                                <input 
+                                    type="text" 
+                                    id="profileLastname" 
+                                    placeholder="Last name" 
+                                    disabled
+                                />
+                            </div>
+                        </div>
+
+                        <div class="profile-form-group">
+                            <label for="profileEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                            <input 
+                                type="email" 
+                                id="profileEmail" 
+                                placeholder="Enter your email" 
+                                disabled
+                            />
+                            <span class="field-hint"><i class="fas fa-info-circle"></i> Your email will not be shared publicly</span>
+                        </div>
+
+                        <div class="profile-form-group">
+                            <label for="profileBio"><i class="fas fa-pen"></i> Bio</label>
+                            <textarea 
+                                id="profileBio" 
+                                placeholder="Tell us about yourself as a traveler..." 
+                                disabled
+                            ></textarea>
+                            <span class="field-hint"><i class="fas fa-info-circle"></i> Share your travel style, favorite destinations, or a fun fact</span>
+                        </div>
+
+                        <!-- Password Change Section -->
+                        <div class="password-change-section" id="passwordSection">
+                            <h4><i class="fas fa-lock"></i> Change Password</h4>
+                            <div class="profile-form-row">
+                                <div class="profile-form-group">
+                                    <label for="currentPassword"><i class="fas fa-key"></i> Current Password</label>
+                                    <div class="password-toggle">
+                                        <input 
+                                            type="password" 
+                                            id="currentPassword" 
+                                            placeholder="Enter current password" 
+                                            disabled
+                                        />
+                                        <button type="button" class="toggle-eye" id="toggleCurrentPassword" aria-label="Toggle password visibility">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="profile-form-group">
+                                    <label for="newPassword"><i class="fas fa-lock"></i> New Password</label>
+                                    <div class="password-toggle">
+                                        <input 
+                                            type="password" 
+                                            id="newPassword" 
+                                            placeholder="Enter new password" 
+                                            disabled
+                                        />
+                                        <button type="button" class="toggle-eye" id="toggleNewPassword" aria-label="Toggle password visibility">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <span class="field-hint"><i class="fas fa-info-circle"></i> Minimum 6 characters</span>
+                                </div>
+                            </div>
+                            <div class="profile-form-group">
+                                <label for="confirmPassword"><i class="fas fa-check-circle"></i> Confirm New Password</label>
+                                <div class="password-toggle">
+                                    <input 
+                                        type="password" 
+                                        id="confirmPassword" 
+                                        placeholder="Confirm new password" 
+                                        disabled
+                                    />
+                                    <button type="button" class="toggle-eye" id="toggleConfirmPassword" aria-label="Toggle password visibility">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="profile-actions">
+                            <button type="button" class="profile-btn primary" id="editProfileBtn">
+                                <i class="fas fa-edit"></i> Edit Profile
+                            </button>
+                            <button type="submit" class="profile-btn" id="saveProfileBtn" style="display:none;">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                            <button type="button" class="profile-btn" id="cancelEditBtn" style="display:none;">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                            <button type="button" class="profile-btn danger" id="deleteAccountBtn">
+                                <i class="fas fa-trash"></i> Delete Account
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+    FOOTER
+    ================================================================ -->
+
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-paper-plane"></i> TripCraft</h3>
+                    <p>Your personal travel journal. Plan your adventures, organize your trips, and keep all your travel memories in one beautiful place.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="#">Travel Styles</a></li>
+                        <li><a href="#">Trip Planner</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="index.html#why">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get in Touch</h4>
+                    <div class="contact-item">
+                        <i class="fas fa-map-pin"></i>
+                        <span>123 Traveler's Lane</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>hello@tripcraft.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+27 63 123 4567</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span><i class="far fa-copyright"></i> 2026 Lorraine.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // ================================================================
+        // PROFILE PAGE JAVASCRIPT
+        // ================================================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // --- Check if user is logged in ---
+            const currentUser = localStorage.getItem('currentUser');
+
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // --- Get user data ---
+            const userDataKey = 'user_' + currentUser;
+            const userDataJSON = localStorage.getItem(userDataKey);
+
+            if (!userDataJSON) {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            let userData;
+            try {
+                userData = JSON.parse(userDataJSON);
+            } catch (e) {
+                console.error('Error parsing user data:', e);
+                localStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // --- DOM Elements ---
+            const profileForm = document.getElementById('profileForm');
+            const editMode = document.getElementById('editMode');
+            const editProfileBtn = document.getElementById('editProfileBtn');
+            const saveProfileBtn = document.getElementById('saveProfileBtn');
+            const cancelEditBtn = document.getElementById('cancelEditBtn');
+            const deleteAccountBtn = document.getElementById('deleteAccountBtn');
+
+            const firstnameInput = document.getElementById('profileFirstname');
+            const lastnameInput = document.getElementById('profileLastname');
+            const emailInput = document.getElementById('profileEmail');
+            const bioInput = document.getElementById('profileBio');
+            const currentPasswordInput = document.getElementById('currentPassword');
+            const newPasswordInput = document.getElementById('newPassword');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+
+            const displayName = document.getElementById('displayName');
+            const displayUsername = document.getElementById('displayUsername');
+            const avatarInitials = document.getElementById('avatarInitials');
+            const memberSince = document.getElementById('memberSince');
+
+            const profileSuccess = document.getElementById('profileSuccess');
+            const profileError = document.getElementById('profileError');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+
+            // --- Populate form with user data ---
+            function populateProfile() {
+                const firstname = userData.firstname || '';
+                const lastname = userData.lastname || '';
+                const email = userData.email || '';
+                const bio = userData.bio || '';
+
+                firstnameInput.value = firstname;
+                lastnameInput.value = lastname;
+                emailInput.value = email;
+                bioInput.value = bio;
+
+                // Update display name
+                const fullName = firstname + ' ' + lastname;
+                displayName.textContent = fullName.trim() || userData.username;
+                displayUsername.textContent = '@' + userData.username;
+
+                // Update avatar initials
+                const initials = (firstname.charAt(0) + lastname.charAt(0)).toUpperCase() || userData.username.charAt(0).toUpperCase();
+                avatarInitials.textContent = initials;
+
+                // Update member since
+                if (userData.createdAt) {
+                    const date = new Date(userData.createdAt);
+                    memberSince.textContent = date.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long'
+                    });
+                } else {
+                    memberSince.textContent = 'January 2026';
+                }
+            }
+
+            populateProfile();
+
+            // --- Toggle Edit Mode ---
+            function setEditMode(isEditing) {
+                const inputs = [firstnameInput, lastnameInput, emailInput, bioInput, 
+                               currentPasswordInput, newPasswordInput, confirmPasswordInput];
+                
+                inputs.forEach(function(input) {
+                    input.disabled = !isEditing;
+                });
+
+                // Special handling for email - only editable in edit mode
+                if (isEditing) {
+                    document.querySelector('.profile-card').classList.add('profile-edit-mode');
+                    document.querySelector('.profile-card').classList.remove('profile-view-mode');
+                } else {
+                    document.querySelector('.profile-card').classList.remove('profile-edit-mode');
+                    document.querySelector('.profile-card').classList.add('profile-view-mode');
+                }
+
+                editMode.value = isEditing ? 'true' : 'false';
+                editProfileBtn.style.display = isEditing ? 'none' : 'inline-flex';
+                saveProfileBtn.style.display = isEditing ? 'inline-flex' : 'none';
+                cancelEditBtn.style.display = isEditing ? 'inline-flex' : 'none';
+            }
+
+            // --- Edit Profile Button ---
+            editProfileBtn.addEventListener('click', function() {
+                setEditMode(true);
+                // Hide any messages
+                profileSuccess.classList.remove('show');
+                profileError.classList.remove('show');
+            });
+
+            // --- Cancel Edit Button ---
+            cancelEditBtn.addEventListener('click', function() {
+                // Reset form to original data
+                populateProfile();
+                setEditMode(false);
+                // Clear password fields
+                currentPasswordInput.value = '';
+                newPasswordInput.value = '';
+                confirmPasswordInput.value = '';
+                // Hide messages
+                profileSuccess.classList.remove('show');
+                profileError.classList.remove('show');
+            });
+
+            // --- Save Profile ---
+            profileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Hide previous messages
+                profileSuccess.classList.remove('show');
+                profileError.classList.remove('show');
+
+                const firstname = firstnameInput.value.trim();
+                const lastname = lastnameInput.value.trim();
+                const email = emailInput.value.trim();
+                const bio = bioInput.value.trim();
+                const currentPassword = currentPasswordInput.value;
+                const newPassword = newPasswordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+
+                // Validation
+                if (!firstname || !lastname) {
+                    errorMessage.textContent = 'First name and last name are required';
+                    profileError.classList.add('show');
+                    return;
+                }
+
+                if (!email) {
+                    errorMessage.textContent = 'Email address is required';
+                    profileError.classList.add('show');
+                    return;
+                }
+
+                if (!email.includes('@') || !email.includes('.')) {
+                    errorMessage.textContent = 'Please enter a valid email address';
+                    profileError.classList.add('show');
+                    return;
+                }
+
+                // Password change validation
+                if (newPassword || confirmPassword || currentPassword) {
+                    if (!currentPassword) {
+                        errorMessage.textContent = 'Please enter your current password to change it';
+                        profileError.classList.add('show');
+                        return;
+                    }
+                    if (currentPassword !== userData.password) {
+                        errorMessage.textContent = 'Current password is incorrect';
+                        profileError.classList.add('show');
+                        return;
+                    }
+                    if (newPassword.length < 6) {
+                        errorMessage.textContent = 'New password must be at least 6 characters';
+                        profileError.classList.add('show');
+                        return;
+                    }
+                    if (newPassword !== confirmPassword) {
+                        errorMessage.textContent = 'New passwords do not match';
+                        profileError.classList.add('show');
+                        return;
+                    }
+                    // Update password
+                    userData.password = newPassword;
+                }
+
+                // Update user data
+                userData.firstname = firstname;
+                userData.lastname = lastname;
+                userData.email = email;
+                userData.bio = bio;
+
+                // Save to localStorage
+                localStorage.setItem(userDataKey, JSON.stringify(userData));
+
+                // Update display
+                populateProfile();
+
+                // Show success message
+                successMessage.textContent = 'Profile updated successfully!';
+                profileSuccess.classList.add('show');
+
+                // Exit edit mode
+                setEditMode(false);
+
+                // Clear password fields
+                currentPasswordInput.value = '';
+                newPasswordInput.value = '';
+                confirmPasswordInput.value = '';
+
+                // Scroll to top of card
+                document.querySelector('.profile-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
+            // --- Password Toggle Visibility ---
+            const toggleButtons = [
+                { id: 'toggleCurrentPassword', input: 'currentPassword' },
+                { id: 'toggleNewPassword', input: 'newPassword' },
+                { id: 'toggleConfirmPassword', input: 'confirmPassword' }
+            ];
+
+            toggleButtons.forEach(function(item) {
+                const btn = document.getElementById(item.id);
+                const input = document.getElementById(item.input);
+                if (btn && input) {
+                    btn.addEventListener('click', function() {
+                        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                        input.setAttribute('type', type);
+                        const icon = this.querySelector('i');
+                        if (icon) {
+                            icon.classList.toggle('fa-eye');
+                            icon.classList.toggle('fa-eye-slash');
+                        }
+                    });
+                }
+            });
+
+            // --- Delete Account ---
+            deleteAccountBtn.addEventListener('click', function() {
+                const confirmed = confirm(
+                    '⚠️ WARNING: This will permanently delete your account and all your data.\n\n' +
+                    'This includes:\n' +
+                    '• Your profile information\n' +
+                    '• All your saved trips\n' +
+                    '• Your wishlist items\n\n' +
+                    'Are you sure you want to continue?'
+                );
+
+                if (!confirmed) return;
+
+                const doubleConfirmed = confirm(
+                    'This action cannot be undone. All your data will be lost forever.\n\n' +
+                    'Are you absolutely sure?'
+                );
+
+                if (!doubleConfirmed) return;
+
+                // Delete user data
+                localStorage.removeItem(userDataKey);
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('rememberMe');
+
+                // Show message before redirect
+                alert('Your account has been deleted. We\'re sorry to see you go!');
+
+                // Redirect to home page
+                window.location.href = 'index.html';
+            });
+
+            // --- Avatar Edit (simple version - just shows alert) ---
+            document.getElementById('avatarEditBtn').addEventListener('click', function() {
+                alert('📸 Avatar customization coming soon!\n\nFor now, your avatar shows your initials.');
+            });
+
+        });
+    </script>
+
+</body>
+</html>

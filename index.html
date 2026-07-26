@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TripCraft</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">
+            <i class="fas fa-paper-plane"></i> TripCraft
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Explore</a></li>
+            <li><a href="index.html#why">About</a></li>
+            <li><a href="index.html#footer">Contact</a></li>
+            <li class="nav-auth" id="navAuth">
+                <!-- DYNAMICALLY UPDATED BY JAVASCRIPT -->
+            </li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-stamp-collection">
+                        <span class="stampie">Dream</span>
+                        <span class="stampie">Plan</span>
+                        <span class="stampie">Go</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Plan Your Next<br />
+                        <span class="highlight">Adventure</span>
+                    </h1>
+                    <p class="hero-sub">
+                        Your personal travel journal for dreaming, planning,
+                        and remembering every journey.
+                    </p>
+                    <a href="destinations.html" class="hero-btn">
+                        Start Exploring <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="hero-pins" id="heroPinsContainer"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-drawn"></div>
+
+    <section class="destinations" id="destinations">
+        <div class="container">
+            <div class="dest-header">
+                <span class="section-badge"><i class="fas fa-compass"></i> Featured Destinations</span>
+                <h2 class="section-title">Where will you go <span class="highlight">next?</span></h2>
+                <p class="section-sub">Handpicked places to fuel your next adventure.</p>
+            </div>
+            <div class="dest-grid" id="featuredGrid"></div>
+        </div>
+    </section>
+
+    <div class="divider-drawn divider-drawn-dark"></div>
+
+    <section class="why" id="why">
+        <div class="container">
+            <div style="text-align:center;">
+                <span class="section-badge"><i class="fas fa-book-open"></i> Why Plan With Us?</span>
+                <h2 class="section-title">Your journey, <span class="highlight">your way</span></h2>
+                <p class="section-sub" style="margin-left:auto;margin-right:auto;">
+                    We make trip planning effortless so you can focus on the adventure.
+                </p>
+            </div>
+            <div class="compass-timeline">
+                <div class="compass-step">
+                    <span class="compass-icon"><i class="fas fa-wand-magic-sparkles"></i></span>
+                    <div class="step-num">01</div>
+                    <h3>Smart Planning Tools</h3>
+                    <p>Our intelligent itinerary builder saves you hours of research. Curated recommendations and budget tracking all in one place.</p>
+                </div>
+                <div class="compass-step">
+                    <span class="compass-icon"><i class="fas fa-hand-holding-heart"></i></span>
+                    <div class="step-num">02</div>
+                    <h3>Personalized Experience</h3>
+                    <p>Every traveler is unique. We tailor suggestions to your style, budget, and interests. From luxury escapes to budget backpacking adventures.</p>
+                </div>
+                <div class="compass-step">
+                    <span class="compass-icon"><i class="fa-regular fa-money-bill-1"></i></span>
+                    <div class="step-num">03</div>
+                    <h3>Save Time & Money</h3>
+                    <p>Compare prices, find the best deals, and access exclusive offers. Our tools help you make smarter decisions and stretch your travel budget further.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-drawn"></div>
+
+    <section class="styles">
+        <div class="container">
+            <div style="text-align:center;">
+                <span class="section-badge"><i class="fas fa-plane"></i> Travel Styles</span>
+                <h2 class="section-title">Every traveler has their <span class="highlight">own way</span></h2>
+                <p class="section-sub" style="margin-left:auto;margin-right:auto;">
+                    Find your perfect travel style.
+                </p>
+            </div>
+            <div class="styles-grid">
+                <div class="style-scribble">
+                    <span class="icon"><i class="fas fa-crown"></i></span>
+                    <h4>Luxury</h4>
+                    <ul>
+                        <li><i class="fas fa-circle"></i> Premium hotels</li>
+                        <li><i class="fas fa-circle"></i> Fine dining</li>
+                        <li><i class="fas fa-circle"></i> Private tours</li>
+                        <li><i class="fas fa-circle"></i> First class</li>
+                    </ul>
+                    <span class="scribble-sticker"><i class="fas fa-gem"></i> Indulge</span>
+                </div>
+                <div class="style-scribble">
+                    <span class="icon"><i class="fas fa-coins"></i></span>
+                    <h4>Budget</h4>
+                    <ul>
+                        <li><i class="fas fa-circle"></i> Hostels</li>
+                        <li><i class="fas fa-circle"></i> Street food</li>
+                        <li><i class="fas fa-circle"></i> Public transport</li>
+                        <li><i class="fas fa-circle"></i> Free tours</li>
+                    </ul>
+                    <span class="scribble-sticker"><i class="fas fa-coins"></i> Save &amp; Explore</span>
+                </div>
+                <div class="style-scribble">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <h4>Family</h4>
+                    <ul>
+                        <li><i class="fas fa-circle"></i> Kid-friendly</li>
+                        <li><i class="fas fa-circle"></i> Group activities</li>
+                        <li><i class="fas fa-circle"></i> Safe locations</li>
+                        <li><i class="fas fa-circle"></i> Family suites</li>
+                    </ul>
+                    <span class="scribble-sticker"><i class="fas fa-baby"></i> Perfect for kids</span>
+                </div>
+                <div class="style-scribble">
+                    <span class="icon"><i class="fas fa-person-walking"></i></span>
+                    <h4>Solo</h4>
+                    <ul>
+                        <li><i class="fas fa-circle"></i> Self-discovery</li>
+                        <li><i class="fas fa-circle"></i> Meet locals</li>
+                        <li><i class="fas fa-circle"></i> Flexible plans</li>
+                        <li><i class="fas fa-circle"></i> Solo safety tips</li>
+                    </ul>
+                    <span class="scribble-sticker"><i class="fas fa-star"></i> Be your own guide</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-drawn divider-drawn-dark"></div>
+
+    <section class="tips">
+        <div class="container">
+            <div style="text-align:center;">
+                <span class="section-badge"><i class="fas fa-lightbulb"></i> Insider Secrets</span>
+                <h2 class="section-title">Tips from the <span class="highlight">road</span></h2>
+                <p class="section-sub" style="margin-left:auto;margin-right:auto;">
+                    Pro tips from seasoned travelers.
+                </p>
+            </div>
+            <div class="sticky-grid">
+                <div class="sticky-note">
+                    <span class="tape coral"></span>
+                    <div class="sticky-header">
+                        <span class="icon"><i class="fas fa-suitcase-rolling"></i></span>
+                        <h4>Pack Light!</h4>
+                    </div>
+                    <p>Pack your suitcase, close it, take out half and you're ready to go!</p>
+                    <ul>
+                        <li><i class="fas fa-circle"></i> Roll your clothes</li>
+                        <li><i class="fas fa-circle"></i> 3-2-1 rule</li>
+                        <li><i class="fas fa-circle"></i> Leave room for souvenirs</li>
+                    </ul>
+                    <span class="sticky-tag"><i class="fas fa-check"></i> Less is more</span>
+                </div>
+                <div class="sticky-note">
+                    <span class="tape"></span>
+                    <div class="sticky-header">
+                        <span class="icon"><i class="fas fa-calendar-check"></i></span>
+                        <h4>Book Early!</h4>
+                    </div>
+                    <p>The early bird catches the best deals and accommodations.</p>
+                    <ul>
+                        <li><i class="fas fa-circle"></i> 3–6 months ahead</li>
+                        <li><i class="fas fa-circle"></i> Tuesday deals</li>
+                        <li><i class="fas fa-circle"></i> Set price alerts</li>
+                    </ul>
+                    <span class="sticky-tag"><i class="fas fa-bullseye"></i> Early bird saves</span>
+                </div>
+                <div class="sticky-note">
+                    <span class="tape sky"></span>
+                    <div class="sticky-header">
+                        <span class="icon"><i class="fas fa-language"></i></span>
+                        <h4>Learn Local!</h4>
+                    </div>
+                    <p>A few words in the local language open hearts and doors.</p>
+                    <ul>
+                        <li><i class="fas fa-circle"></i> Hello / Thank you</li>
+                        <li><i class="fas fa-circle"></i> Please / Excuse me</li>
+                        <li><i class="fas fa-circle"></i> Local apps</li>
+                    </ul>
+                    <span class="sticky-tag"><i class="fas fa-comments"></i> Connect better</span>
+                </div>
+                <div class="sticky-note">
+                    <span class="tape lavender"></span>
+                    <div class="sticky-header">
+                        <span class="icon"><i class="fas fa-shield-alt"></i></span>
+                        <h4>Get Insurance!</h4>
+                    </div>
+                    <p>Hope for the best, but prepare for the unexpected.</p>
+                    <ul>
+                        <li><i class="fas fa-circle"></i> Medical coverage</li>
+                        <li><i class="fas fa-circle"></i> Trip cancellation</li>
+                        <li><i class="fas fa-circle"></i> Lost luggage</li>
+                    </ul>
+                    <span class="sticky-tag"><i class="fas fa-lock"></i> Stay safe</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL -->
+    <div class="modal" id="detailModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            
+            <div class="modal-scrapbook">
+                
+                <!-- LEFT COLUMN - PHOTOS + TAGS -->
+                <div class="modal-left">
+                    
+                    <div class="modal-photo photo-top">
+                        <img src="" alt="" id="modalImg1" />
+                    </div>
+                    
+                    <div class="modal-photo photo-middle">
+                        <img src="" alt="" id="modalImg2" />
+                    </div>
+                    
+                    <div class="modal-photo photo-bottom">
+                        <img src="" alt="" id="modalImg3" />
+                    </div>
+                    
+                    <!-- TAGS SCATTERED UNDER IMAGES -->
+                    <div class="modal-tags-under">
+                        <span class="scrap-tag tag-flight" id="modalTag1">Flight: 14hr</span>
+                        <span class="scrap-tag tag-timezone" id="modalTag2">Time Zone: UTC+9</span>
+                        <span class="scrap-tag tag-currency" id="modalTag3">Currency: Yen</span>
+                        <span class="scrap-tag tag-budget" id="modalBudgetShort">Budget: R1,500-2,800</span>
+                        <span class="scrap-tag tag-population" id="modalTag4">Population: 14 million</span>
+                        <div id="modalSeasonsTag" class="modal-seasons-tag-container"></div>
+                    </div>
+                    
+                </div>
+                
+                <!-- RIGHT COLUMN - INFORMATION -->
+                <div class="modal-right">
+                    
+                    <!-- Destination Name -->
+                    <div class="modal-name-block">
+                        <div class="torn-tape"></div>
+                        <h2><span class="highlight" id="modalCountry">Tokyo</span></h2>
+                        <span id="modalContinent" class="modal-continent">Japan · ASIA</span>
+                        <span class="modal-details" id="modalDetails">Capital: Tokyo · Language: Japanese</span>
+                    </div>
+                    
+                    <!-- Description -->
+                    <div class="modal-description">
+                        <p id="modalDescription">Tokyo is where ancient temples meet neon towers...</p>
+                    </div>
+                    
+                    <!-- Cards Row -->
+                    <div class="modal-cards-row">
+                        
+                        <!-- See Card -->
+                        <div class="scrap-card card-see">
+                            <div class="card-pin"></div>
+                            <div class="card-header">
+                                <h3>See</h3>
+                            </div>
+                            <ul id="modalAttractions"></ul>
+                        </div>
+                        
+                        <!-- Eat Card -->
+                        <div class="scrap-card card-eat">
+                            <div class="card-pin"></div>
+                            <div class="card-header">
+                                <h3>Eat</h3>
+                            </div>
+                            <ul id="modalCuisine"></ul>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Tips Card -->
+                    <div class="scrap-card card-tips">
+                        <div class="card-pin"></div>
+                        <div class="card-header">
+                            <h3>Tips</h3>
+                        </div>
+                        <ul id="modalTips"></ul>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Plan Button -->
+            <button class="plan-btn" data-dest-id="">
+                <i class="fas fa-paper-plane"></i> Plan This Trip
+            </button>
+            
+        </div>
+    </div>
+
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-paper-plane"></i> TripCraft</h3>
+                    <p>Your personal travel journal. Plan your adventures, organize your trips, and keep all your travel memories in one beautiful place.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="#">Travel Styles</a></li>
+                        <li><a href="#">Trip Planner</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="index.html#why">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get in Touch</h4>
+                    <div class="contact-item">
+                        <i class="fas fa-map-pin"></i>
+                        <span>123 Traveler's Lane</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>hello@tripcraft.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+27 63 123 4567</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span><i class="far fa-copyright"></i> 2026 Lorraine.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

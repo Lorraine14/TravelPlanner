@@ -1,0 +1,2713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plan Your Trip - TripCraft</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        /* ================================================================
+           PLAN TRIP PAGE - COMPLETE STYLES
+           ================================================================ */
+
+        .plan-page {
+            min-height: 100vh;
+            padding: 120px 0 60px;
+            background: linear-gradient(145deg, #FDF8F0 0%, #F5EDE5 45%, #EDE5DD 100%);
+            position: relative;
+        }
+
+        .plan-page::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 15% 25%, rgba(255, 107, 107, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 85% 75%, rgba(78, 205, 196, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .plan-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 28px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ================================================================
+           HEADER
+           ================================================================ */
+
+        .plan-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 4px solid var(--charcoal);
+            border-bottom-style: dashed;
+            opacity: 0.8;
+        }
+
+        .plan-header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .plan-back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            font-family: 'Nunito', sans-serif;
+            color: var(--charcoal);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            transform: rotate(-0.5deg);
+            text-decoration: none;
+        }
+
+        .plan-back-btn::before {
+            content: '';
+            position: absolute;
+            inset: -4px -8px;
+            border: 3px solid var(--charcoal);
+            clip-path: polygon(0% 0%, 97% 2%, 100% 6%, 98% 94%, 95% 98%, 3% 100%, 0% 95%, 2% 4%);
+            transition: all 0.3s ease;
+        }
+
+        .plan-back-btn:hover {
+            transform: rotate(0deg) translateY(-2px);
+        }
+
+        .plan-back-btn:hover::before {
+            border-color: var(--coral);
+        }
+
+        .plan-title-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .plan-title-area h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin: 0;
+        }
+
+        .plan-title-area .highlight {
+            color: var(--coral);
+            position: relative;
+        }
+
+        .plan-title-area .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: var(--mustard);
+            opacity: 0.3;
+            border-radius: 2px;
+            transform: rotate(-1deg);
+        }
+
+        .plan-status-select {
+            padding: 4px 12px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            border: 3px solid var(--charcoal);
+            border-radius: 4px;
+            background: #fff;
+            color: var(--charcoal);
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .plan-status-select:focus {
+            border-color: var(--coral);
+        }
+
+        .plan-header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .plan-save-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 24px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            font-family: 'Nunito', sans-serif;
+            color: var(--charcoal);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            transform: rotate(-0.5deg);
+        }
+
+        .plan-save-btn::before {
+            content: '';
+            position: absolute;
+            inset: -4px -8px;
+            border: 3px solid var(--charcoal);
+            clip-path: polygon(0% 0%, 97% 2%, 100% 6%, 98% 94%, 95% 98%, 3% 100%, 0% 95%, 2% 4%);
+            transition: all 0.3s ease;
+        }
+
+        .plan-save-btn:hover {
+            transform: rotate(0deg) translateY(-2px) scale(1.02);
+        }
+
+        .plan-save-btn:hover::before {
+            border-color: var(--coral);
+            clip-path: polygon(0% 0%, 98% 2%, 100% 8%, 96% 96%, 92% 100%, 2% 98%, 0% 92%, 2% 2%);
+        }
+
+        .plan-save-btn.saved::before {
+            border-color: #4CAF50;
+        }
+
+        /* ================================================================
+           OVERVIEW SECTION
+           ================================================================ */
+
+        .overview-card {
+            background: #fff;
+            border: 4px solid var(--charcoal);
+            border-radius: 4px;
+            padding: 20px 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(44, 44, 58, 0.08);
+            transform: rotate(-0.5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .overview-card:hover {
+            transform: rotate(0deg);
+        }
+
+        .overview-card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 60px;
+            height: 16px;
+            background: rgba(255, 217, 61, 0.35);
+            border-radius: 2px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .overview-card {
+            position: relative;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 40px;
+        }
+
+        .overview-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .overview-item label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #7A7A8E;
+        }
+
+        .overview-item label i {
+            color: var(--coral);
+            margin-right: 6px;
+            width: 16px;
+        }
+
+        .overview-item input,
+        .overview-item textarea {
+            padding: 8px 12px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.9rem;
+            border: 2px solid var(--charcoal);
+            border-radius: 4px;
+            background: var(--cream);
+            color: var(--charcoal);
+            transition: all 0.3s ease;
+            outline: none;
+            width: 100%;
+        }
+
+        .overview-item input:focus,
+        .overview-item textarea:focus {
+            border-color: var(--coral);
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.12);
+            background: #fff;
+        }
+
+        .overview-item input[type="date"] {
+            cursor: pointer;
+        }
+
+        .overview-item textarea {
+            resize: vertical;
+            min-height: 40px;
+        }
+
+        .overview-full {
+            grid-column: 1 / -1;
+        }
+
+        /* ================================================================
+           MAIN LAYOUT - SIDEBAR + CONTENT
+           ================================================================ */
+
+        .plan-layout {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* ================================================================
+           SIDEBAR NAVIGATION
+           ================================================================ */
+
+        .plan-sidebar {
+            position: sticky;
+            top: 90px;
+            background: #fff;
+            border: 4px solid var(--charcoal);
+            border-radius: 4px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .plan-sidebar-btn {
+            padding: 8px 14px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 2px solid transparent;
+            background: transparent;
+            color: var(--charcoal);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            font-family: 'Nunito', sans-serif;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .plan-sidebar-btn i {
+            color: var(--coral);
+            opacity: 0.5;
+            width: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .plan-sidebar-btn:hover {
+            background: rgba(255, 107, 107, 0.08);
+            border-color: rgba(255, 107, 107, 0.2);
+        }
+
+        .plan-sidebar-btn:hover i {
+            opacity: 0.8;
+        }
+
+        .plan-sidebar-btn.active {
+            background: var(--coral);
+            color: #fff;
+            border-color: var(--coral);
+        }
+
+        .plan-sidebar-btn.active i {
+            color: #fff;
+            opacity: 1;
+        }
+
+        /* ================================================================
+           CONTENT AREA
+           ================================================================ */
+
+        .plan-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .plan-section {
+            display: none;
+            background: #fff;
+            border: 4px solid var(--charcoal);
+            border-radius: 4px;
+            padding: 20px 24px;
+            box-shadow: 0 4px 20px rgba(44, 44, 58, 0.08);
+            transform: rotate(var(--rot, 0deg));
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .plan-section:hover {
+            transform: rotate(0deg);
+        }
+
+        .plan-section.active {
+            display: block;
+        }
+
+        .plan-section:nth-child(1) { --rot: -0.5deg; }
+        .plan-section:nth-child(2) { --rot: 0.5deg; }
+        .plan-section:nth-child(3) { --rot: -0.3deg; }
+        .plan-section:nth-child(4) { --rot: 0.3deg; }
+        .plan-section:nth-child(5) { --rot: -0.7deg; }
+        .plan-section:nth-child(6) { --rot: 0.7deg; }
+        .plan-section:nth-child(7) { --rot: -0.4deg; }
+
+        .plan-section::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 50px;
+            height: 14px;
+            background: rgba(255, 217, 61, 0.3);
+            border-radius: 2px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 3px dashed rgba(44, 44, 58, 0.10);
+        }
+
+        .section-header h2 {
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            color: var(--charcoal);
+            margin: 0;
+        }
+
+        .section-header h2 i {
+            color: var(--coral);
+            margin-right: 8px;
+        }
+
+        .section-header .add-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 16px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            font-family: 'Nunito', sans-serif;
+            color: var(--charcoal);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            transform: rotate(-0.5deg);
+        }
+
+        .section-header .add-btn::before {
+            content: '';
+            position: absolute;
+            inset: -3px -6px;
+            border: 3px solid var(--charcoal);
+            clip-path: polygon(0% 0%, 97% 2%, 100% 6%, 98% 94%, 95% 98%, 3% 100%, 0% 95%, 2% 4%);
+            transition: all 0.3s ease;
+        }
+
+        .section-header .add-btn:hover {
+            transform: rotate(0deg) translateY(-2px);
+        }
+
+        .section-header .add-btn:hover::before {
+            border-color: var(--coral);
+        }
+
+        .section-header .add-btn i {
+            color: var(--coral);
+        }
+
+        /* ================================================================
+           ITINERARY ITEMS
+           ================================================================ */
+
+        .day-card {
+            background: var(--cream);
+            border: 3px solid var(--charcoal);
+            border-radius: 4px;
+            padding: 16px 18px;
+            margin-bottom: 14px;
+            transition: all 0.3s ease;
+            transform: rotate(var(--rot, 0deg));
+        }
+
+        .day-card:hover {
+            transform: rotate(0deg);
+            border-color: var(--coral);
+            box-shadow: 0 4px 16px rgba(44, 44, 58, 0.08);
+        }
+
+        .day-card:nth-child(odd) { --rot: -0.5deg; }
+        .day-card:nth-child(even) { --rot: 0.5deg; }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .day-header h3 {
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            color: var(--charcoal);
+            margin: 0;
+        }
+
+        .day-header .day-date {
+            font-size: 0.8rem;
+            color: #7A7A8E;
+        }
+
+        .day-header .day-date input {
+            padding: 4px 8px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.8rem;
+            border: 2px solid var(--charcoal);
+            border-radius: 4px;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .day-header .day-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .day-header .day-actions button {
+            background: none;
+            border: none;
+            color: var(--coral);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 2px 6px;
+            transition: all 0.3s ease;
+        }
+
+        .day-header .day-actions button:hover {
+            transform: scale(1.1);
+            color: var(--coral-dark);
+        }
+
+        .day-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .day-field {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .day-field label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #7A7A8E;
+        }
+
+        .day-field input,
+        .day-field textarea {
+            padding: 6px 10px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.85rem;
+            border: 2px solid var(--charcoal);
+            border-radius: 4px;
+            background: #fff;
+            transition: all 0.3s ease;
+            outline: none;
+            width: 100%;
+        }
+
+        .day-field input:focus,
+        .day-field textarea:focus {
+            border-color: var(--coral);
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.12);
+        }
+
+        .day-field textarea {
+            resize: vertical;
+            min-height: 36px;
+        }
+
+        .day-full {
+            grid-column: 1 / -1;
+        }
+
+        .day-meals {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        /* ================================================================
+           ACCOMMODATION, TRANSPORT, ACTIVITIES ITEMS
+           ================================================================ */
+
+        .item-card {
+            background: var(--cream);
+            border: 3px solid var(--charcoal);
+            border-radius: 4px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            transform: rotate(var(--rot, 0deg));
+        }
+
+        .item-card:hover {
+            transform: rotate(0deg);
+            border-color: var(--coral);
+            box-shadow: 0 4px 16px rgba(44, 44, 58, 0.08);
+        }
+
+        .item-card:nth-child(odd) { --rot: -0.3deg; }
+        .item-card:nth-child(even) { --rot: 0.3deg; }
+
+        .item-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .item-header h4 {
+            font-family: 'Caveat', cursive;
+            font-size: 1.4rem;
+            color: var(--charcoal);
+            margin: 0;
+        }
+
+        .item-header .item-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .item-header .item-actions button {
+            background: none;
+            border: none;
+            color: var(--coral);
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 2px 6px;
+            transition: all 0.3s ease;
+        }
+
+        .item-header .item-actions button:hover {
+            transform: scale(1.1);
+            color: var(--coral-dark);
+        }
+
+        .item-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+        }
+
+        .item-field {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .item-field label {
+            font-size: 0.55rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #7A7A8E;
+        }
+
+        .item-field input,
+        .item-field select,
+        .item-field textarea {
+            padding: 5px 10px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.8rem;
+            border: 2px solid var(--charcoal);
+            border-radius: 4px;
+            background: #fff;
+            transition: all 0.3s ease;
+            outline: none;
+            width: 100%;
+        }
+
+        .item-field input:focus,
+        .item-field select:focus,
+        .item-field textarea:focus {
+            border-color: var(--coral);
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.12);
+        }
+
+        .item-field select {
+            cursor: pointer;
+        }
+
+        .item-field textarea {
+            resize: vertical;
+            min-height: 30px;
+        }
+
+        .item-full {
+            grid-column: 1 / -1;
+        }
+
+        /* ================================================================
+           PACKING LIST
+           ================================================================ */
+
+        .packing-category {
+            margin-bottom: 14px;
+        }
+
+        .packing-category h4 {
+            font-family: 'Caveat', cursive;
+            font-size: 1.3rem;
+            color: var(--charcoal);
+            margin: 0 0 8px 0;
+        }
+
+        .packing-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .packing-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 12px;
+            background: #fff;
+            border: 2px solid var(--charcoal);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .packing-item.packed {
+            opacity: 0.5;
+            border-color: #4CAF50;
+            text-decoration: line-through;
+        }
+
+        .packing-item input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--coral);
+            cursor: pointer;
+        }
+
+        .packing-item label {
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .packing-item .remove-item {
+            background: none;
+            border: none;
+            color: var(--coral);
+            cursor: pointer;
+            font-size: 0.7rem;
+            padding: 0 2px;
+        }
+
+        .packing-item .remove-item:hover {
+            transform: scale(1.1);
+        }
+
+        .packing-add {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .packing-add input {
+            padding: 6px 12px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.8rem;
+            border: 2px solid var(--charcoal);
+            border-radius: 4px;
+            background: #fff;
+            outline: none;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .packing-add input:focus {
+            border-color: var(--coral);
+        }
+
+        .packing-add select {
+            padding: 6px 12px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.8rem;
+            border: 2px solid var(--charcoal);
+            border-radius: 4px;
+            background: #fff;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .packing-add select:focus {
+            border-color: var(--coral);
+        }
+
+        .packing-add .add-item-btn {
+            padding: 6px 16px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            font-family: 'Nunito', sans-serif;
+            color: var(--charcoal);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            transform: rotate(-0.5deg);
+        }
+
+        .packing-add .add-item-btn::before {
+            content: '';
+            position: absolute;
+            inset: -3px -6px;
+            border: 3px solid var(--charcoal);
+            clip-path: polygon(0% 0%, 97% 2%, 100% 6%, 98% 94%, 95% 98%, 3% 100%, 0% 95%, 2% 4%);
+            transition: all 0.3s ease;
+        }
+
+        .packing-add .add-item-btn:hover {
+            transform: rotate(0deg) translateY(-2px);
+        }
+
+        .packing-add .add-item-btn:hover::before {
+            border-color: var(--coral);
+        }
+
+        /* ================================================================
+           BUDGET TRACKER
+           ================================================================ */
+
+        .budget-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding: 12px;
+            background: var(--cream);
+            border: 3px solid var(--charcoal);
+            border-radius: 4px;
+        }
+
+        .budget-summary .budget-item {
+            text-align: center;
+        }
+
+        .budget-summary .budget-item .amount {
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            display: block;
+            line-height: 1;
+        }
+
+        .budget-summary .budget-item .amount.coral {
+            color: var(--coral);
+        }
+        .budget-summary .budget-item .amount.green {
+            color: #4CAF50;
+        }
+        .budget-summary .budget-item .amount.mustard {
+            color: var(--mustard-dark);
+        }
+
+        .budget-summary .budget-item .label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #7A7A8E;
+            font-weight: 700;
+        }
+
+        .budget-bar {
+            width: 100%;
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            border: 2px solid var(--charcoal);
+        }
+
+        .budget-bar .budget-fill {
+            height: 100%;
+            background: var(--coral);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        .budget-bar .budget-fill.green {
+            background: #4CAF50;
+        }
+        .budget-bar .budget-fill.mustard {
+            background: var(--mustard);
+        }
+        .budget-bar .budget-fill.coral {
+            background: var(--coral);
+        }
+
+        .budget-expenses {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .budget-expense {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 12px;
+            background: #fff;
+            border: 2px solid var(--charcoal);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .budget-expense .expense-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .budget-expense .expense-left .category {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.6rem;
+            color: #7A7A8E;
+        }
+
+        .budget-expense .expense-left .description {
+            color: var(--charcoal);
+        }
+
+        .budget-expense .expense-amount {
+            font-weight: 700;
+            color: var(--coral);
+        }
+
+        .budget-expense .expense-actions {
+            display: flex;
+            gap: 4px;
+        }
+
+        .budget-expense .expense-actions button {
+            background: none;
+            border: none;
+            color: var(--coral);
+            cursor: pointer;
+            font-size: 0.7rem;
+            padding: 0 4px;
+        }
+
+        .budget-expense .expense-actions button:hover {
+            transform: scale(1.1);
+        }
+
+        .budget-add {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .budget-add select,
+        .budget-add input {
+            padding: 6px 12px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.8rem;
+            border: 2px solid var(--charcoal);
+            border-radius: 4px;
+            background: #fff;
+            outline: none;
+        }
+
+        .budget-add select:focus,
+        .budget-add input:focus {
+            border-color: var(--coral);
+        }
+
+        .budget-add .add-expense-btn {
+            padding: 6px 16px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            font-family: 'Nunito', sans-serif;
+            color: var(--charcoal);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            transform: rotate(-0.5deg);
+        }
+
+        .budget-add .add-expense-btn::before {
+            content: '';
+            position: absolute;
+            inset: -3px -6px;
+            border: 3px solid var(--charcoal);
+            clip-path: polygon(0% 0%, 97% 2%, 100% 6%, 98% 94%, 95% 98%, 3% 100%, 0% 95%, 2% 4%);
+            transition: all 0.3s ease;
+        }
+
+        .budget-add .add-expense-btn:hover {
+            transform: rotate(0deg) translateY(-2px);
+        }
+
+        .budget-add .add-expense-btn:hover::before {
+            border-color: var(--coral);
+        }
+
+        /* ================================================================
+           NOTES & JOURNAL
+           ================================================================ */
+
+        .journal-entry {
+            background: var(--cream);
+            border: 3px solid var(--charcoal);
+            border-radius: 4px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .journal-entry:hover {
+            border-color: var(--coral);
+        }
+
+        .journal-entry .journal-date {
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--coral);
+            margin-bottom: 4px;
+        }
+
+        .journal-entry .journal-text {
+            font-size: 0.85rem;
+            color: var(--charcoal);
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .journal-entry .journal-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .journal-entry .journal-actions button {
+            background: none;
+            border: none;
+            color: var(--coral);
+            cursor: pointer;
+            font-size: 0.7rem;
+            padding: 0 4px;
+        }
+
+        .journal-entry .journal-actions button:hover {
+            transform: scale(1.1);
+        }
+
+        .journal-add textarea {
+            width: 100%;
+            padding: 10px 14px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.85rem;
+            border: 3px solid var(--charcoal);
+            border-radius: 4px;
+            background: #fff;
+            resize: vertical;
+            min-height: 80px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .journal-add textarea:focus {
+            border-color: var(--coral);
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.12);
+        }
+
+        .journal-add .add-journal-btn {
+            margin-top: 6px;
+            padding: 6px 20px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            font-family: 'Nunito', sans-serif;
+            color: var(--charcoal);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            transform: rotate(-0.5deg);
+        }
+
+        .journal-add .add-journal-btn::before {
+            content: '';
+            position: absolute;
+            inset: -3px -6px;
+            border: 3px solid var(--charcoal);
+            clip-path: polygon(0% 0%, 97% 2%, 100% 6%, 98% 94%, 95% 98%, 3% 100%, 0% 95%, 2% 4%);
+            transition: all 0.3s ease;
+        }
+
+        .journal-add .add-journal-btn:hover {
+            transform: rotate(0deg) translateY(-2px);
+        }
+
+        .journal-add .add-journal-btn:hover::before {
+            border-color: var(--coral);
+        }
+
+        /* ================================================================
+           RESPONSIVE
+           ================================================================ */
+
+        @media (max-width: 992px) {
+            .plan-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .plan-sidebar {
+                position: relative;
+                top: 0;
+                flex-direction: row;
+                flex-wrap: wrap;
+                padding: 10px;
+                gap: 4px;
+            }
+
+            .plan-sidebar-btn {
+                flex: 1;
+                min-width: 80px;
+                justify-content: center;
+                text-align: center;
+                padding: 6px 10px;
+                font-size: 0.7rem;
+            }
+
+            .plan-sidebar-btn i {
+                margin-right: 4px;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .overview-full {
+                grid-column: 1;
+            }
+
+            .day-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .day-meals {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .day-full {
+                grid-column: 1;
+            }
+
+            .item-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .item-full {
+                grid-column: 1;
+            }
+
+            .budget-summary {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .plan-page {
+                padding: 100px 0 40px;
+            }
+
+            .plan-container {
+                padding: 0 16px;
+            }
+
+            .plan-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .plan-header-left {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+
+            .plan-title-area h1 {
+                font-size: 2.2rem;
+            }
+
+            .plan-header-right {
+                justify-content: flex-end;
+            }
+
+            .budget-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .day-meals {
+                grid-template-columns: 1fr;
+            }
+
+            .plan-sidebar-btn {
+                font-size: 0.65rem;
+                min-width: 60px;
+                padding: 4px 8px;
+            }
+
+            .plan-section {
+                padding: 14px 16px;
+            }
+
+            .section-header h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .plan-title-area h1 {
+                font-size: 1.8rem;
+            }
+
+            .plan-back-btn {
+                font-size: 0.7rem;
+                padding: 6px 14px;
+            }
+
+            .plan-save-btn {
+                font-size: 0.7rem;
+                padding: 6px 16px;
+            }
+
+            .overview-item input,
+            .overview-item textarea {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
+
+            .day-header h3 {
+                font-size: 1.3rem;
+            }
+
+            .day-field input,
+            .day-field textarea {
+                font-size: 0.75rem;
+                padding: 4px 8px;
+            }
+
+            .item-field input,
+            .item-field select,
+            .item-field textarea {
+                font-size: 0.75rem;
+                padding: 4px 8px;
+            }
+
+            .packing-item {
+                font-size: 0.7rem;
+                padding: 3px 10px;
+            }
+
+            .budget-summary .budget-item .amount {
+                font-size: 1.6rem;
+            }
+
+            .plan-sidebar-btn {
+                font-size: 0.55rem;
+                min-width: 50px;
+                padding: 4px 6px;
+            }
+
+            .plan-sidebar-btn i {
+                font-size: 0.7rem;
+            }
+        }
+
+        .plan-page .navbar {
+            background: rgba(253, 248, 240, 0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">
+            <i class="fas fa-paper-plane"></i> TripCraft
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Explore</a></li>
+            <li><a href="index.html#why">About</a></li>
+            <li><a href="index.html#footer">Contact</a></li>
+            <li class="nav-auth" id="navAuth">
+                <!-- DYNAMICALLY UPDATED BY JAVASCRIPT -->
+            </li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <section class="plan-page">
+        <div class="plan-container">
+
+            <!-- HEADER -->
+            <div class="plan-header">
+                <div class="plan-header-left">
+                    <a href="trips.html" class="plan-back-btn">
+                        <i class="fas fa-arrow-left"></i> Back to My Trips
+                    </a>
+                    <div class="plan-title-area">
+                        <h1>Planning: <span class="highlight" id="planDestination">Tokyo</span></h1>
+                        <select class="plan-status-select" id="planStatus">
+                            <option value="planning">Planning</option>
+                            <option value="upcoming">Upcoming</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="plan-header-right">
+                    <button class="plan-save-btn" id="planSaveBtn">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                </div>
+            </div>
+
+            <!-- OVERVIEW -->
+            <div class="overview-card">
+                <div class="overview-grid">
+                    <div class="overview-item">
+                        <label><i class="fas fa-map-pin"></i> Destination</label>
+                        <input type="text" id="overviewDestination" />
+                    </div>
+                    <div class="overview-item">
+                        <label><i class="fas fa-flag"></i> Country</label>
+                        <input type="text" id="overviewCountry" />
+                    </div>
+                    <div class="overview-item">
+                        <label><i class="fas fa-calendar-alt"></i> Start Date</label>
+                        <input type="date" id="overviewStartDate" />
+                    </div>
+                    <div class="overview-item">
+                        <label><i class="fas fa-calendar-alt"></i> End Date</label>
+                        <input type="date" id="overviewEndDate" />
+                    </div>
+                    <div class="overview-item overview-full">
+                        <label><i class="fas fa-coins"></i> Budget Range</label>
+                        <input type="text" id="overviewBudget" placeholder="e.g. R1,500 - R2,800" />
+                    </div>
+                    <div class="overview-item overview-full">
+                        <label><i class="fas fa-sticky-note"></i> Trip Notes</label>
+                        <textarea id="overviewNotes" rows="2" placeholder="General notes about this trip..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAIN LAYOUT -->
+            <div class="plan-layout">
+
+                <!-- SIDEBAR -->
+                <div class="plan-sidebar" id="planSidebar">
+                    <button class="plan-sidebar-btn active" data-section="itinerary">
+                        <i class="fas fa-calendar-day"></i> Itinerary
+                    </button>
+                    <button class="plan-sidebar-btn" data-section="accommodation">
+                        <i class="fas fa-hotel"></i> Hotels
+                    </button>
+                    <button class="plan-sidebar-btn" data-section="transport">
+                        <i class="fas fa-plane"></i> Transport
+                    </button>
+                    <button class="plan-sidebar-btn" data-section="activities">
+                        <i class="fas fa-ticket-alt"></i> Activities
+                    </button>
+                    <button class="plan-sidebar-btn" data-section="packing">
+                        <i class="fas fa-suitcase"></i> Packing
+                    </button>
+                    <button class="plan-sidebar-btn" data-section="budget">
+                        <i class="fas fa-wallet"></i> Budget
+                    </button>
+                    <button class="plan-sidebar-btn" data-section="journal">
+                        <i class="fas fa-book"></i> Journal
+                    </button>
+                </div>
+
+                <!-- CONTENT AREA -->
+                <div class="plan-content">
+
+                    <!-- ITINERARY SECTION -->
+                    <div class="plan-section active" id="sectionItinerary">
+                        <div class="section-header">
+                            <h2><i class="fas fa-calendar-day"></i> Itinerary</h2>
+                            <button class="add-btn" id="addDayBtn"><i class="fas fa-plus"></i> Add Day</button>
+                        </div>
+                        <div id="itineraryContainer">
+                            <!-- Days rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- ACCOMMODATION SECTION -->
+                    <div class="plan-section" id="sectionAccommodation">
+                        <div class="section-header">
+                            <h2><i class="fas fa-hotel"></i> Accommodation</h2>
+                            <button class="add-btn" id="addAccommodationBtn"><i class="fas fa-plus"></i> Add Hotel</button>
+                        </div>
+                        <div id="accommodationContainer">
+                            <!-- Accommodation items rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- TRANSPORT SECTION -->
+                    <div class="plan-section" id="sectionTransport">
+                        <div class="section-header">
+                            <h2><i class="fas fa-plane"></i> Transport</h2>
+                            <button class="add-btn" id="addTransportBtn"><i class="fas fa-plus"></i> Add Transport</button>
+                        </div>
+                        <div id="transportContainer">
+                            <!-- Transport items rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- ACTIVITIES SECTION -->
+                    <div class="plan-section" id="sectionActivities">
+                        <div class="section-header">
+                            <h2><i class="fas fa-ticket-alt"></i> Activities</h2>
+                            <button class="add-btn" id="addActivityBtn"><i class="fas fa-plus"></i> Add Activity</button>
+                        </div>
+                        <div id="activitiesContainer">
+                            <!-- Activities rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- PACKING SECTION -->
+                    <div class="plan-section" id="sectionPacking">
+                        <div class="section-header">
+                            <h2><i class="fas fa-suitcase"></i> Packing List</h2>
+                        </div>
+                        <div id="packingContainer">
+                            <!-- Packing list rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- BUDGET SECTION -->
+                    <div class="plan-section" id="sectionBudget">
+                        <div class="section-header">
+                            <h2><i class="fas fa-wallet"></i> Budget Tracker</h2>
+                        </div>
+                        <div id="budgetContainer">
+                            <!-- Budget rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- JOURNAL SECTION -->
+                    <div class="plan-section" id="sectionJournal">
+                        <div class="section-header">
+                            <h2><i class="fas fa-book"></i> Notes & Journal</h2>
+                        </div>
+                        <div id="journalContainer">
+                            <!-- Journal entries rendered here -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-paper-plane"></i> TripCraft</h3>
+                    <p>Your personal travel journal. Plan your adventures, organize your trips, and keep all your travel memories in one beautiful place.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="#">Travel Styles</a></li>
+                        <li><a href="#">Trip Planner</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="index.html#why">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get in Touch</h4>
+                    <div class="contact-item">
+                        <i class="fas fa-map-pin"></i>
+                        <span>123 Traveler's Lane</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>hello@tripcraft.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+27 63 123 4567</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span><i class="far fa-copyright"></i> 2026 Lorraine.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Check if user is logged in
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Get trip ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const tripId = urlParams.get('id');
+
+            if (!tripId) {
+                alert('No trip selected');
+                window.location.href = 'trips.html';
+                return;
+            }
+
+            // Get user data
+            const userDataKey = 'user_' + currentUser;
+            const userDataJSON = localStorage.getItem(userDataKey);
+
+            if (!userDataJSON) {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            let userData;
+            try {
+                userData = JSON.parse(userDataJSON);
+            } catch (e) {
+                console.error('Error parsing user data:', e);
+                localStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Find the trip
+            let tripData = null;
+            let tripIndex = -1;
+
+            if (userData.trips) {
+                userData.trips.forEach(function(trip, index) {
+                    if (trip.id === tripId) {
+                        tripData = trip;
+                        tripIndex = index;
+                    }
+                });
+            }
+
+            if (!tripData) {
+                alert('Trip not found');
+                window.location.href = 'trips.html';
+                return;
+            }
+
+            // Initialize trip plan data if not exists
+            if (!tripData.plan) {
+                tripData.plan = {
+                    overview: {
+                        destination: tripData.destination || '',
+                        country: tripData.country || '',
+                        startDate: tripData.startDate || '',
+                        endDate: tripData.endDate || '',
+                        budget: tripData.budget || '',
+                        notes: tripData.notes || ''
+                    },
+                    days: [],
+                    accommodation: [],
+                    transport: [],
+                    activities: [],
+                    packing: [],
+                    expenses: [],
+                    journal: []
+                };
+            }
+
+            // DOM elements
+            const planDestination = document.getElementById('planDestination');
+            const planStatus = document.getElementById('planStatus');
+            const overviewDestination = document.getElementById('overviewDestination');
+            const overviewCountry = document.getElementById('overviewCountry');
+            const overviewStartDate = document.getElementById('overviewStartDate');
+            const overviewEndDate = document.getElementById('overviewEndDate');
+            const overviewBudget = document.getElementById('overviewBudget');
+            const overviewNotes = document.getElementById('overviewNotes');
+
+            const itineraryContainer = document.getElementById('itineraryContainer');
+            const accommodationContainer = document.getElementById('accommodationContainer');
+            const transportContainer = document.getElementById('transportContainer');
+            const activitiesContainer = document.getElementById('activitiesContainer');
+            const packingContainer = document.getElementById('packingContainer');
+            const budgetContainer = document.getElementById('budgetContainer');
+            const journalContainer = document.getElementById('journalContainer');
+
+            // Populate overview
+            function populateOverview() {
+                const plan = tripData.plan;
+                planDestination.textContent = tripData.destination || 'Trip';
+                planStatus.value = tripData.status || 'planning';
+                overviewDestination.value = plan.overview.destination || tripData.destination || '';
+                overviewCountry.value = plan.overview.country || tripData.country || '';
+                overviewStartDate.value = plan.overview.startDate || tripData.startDate || '';
+                overviewEndDate.value = plan.overview.endDate || tripData.endDate || '';
+                overviewBudget.value = plan.overview.budget || tripData.budget || '';
+                overviewNotes.value = plan.overview.notes || tripData.notes || '';
+            }
+
+            // Save overview
+            function saveOverview() {
+                tripData.plan.overview.destination = overviewDestination.value;
+                tripData.plan.overview.country = overviewCountry.value;
+                tripData.plan.overview.startDate = overviewStartDate.value;
+                tripData.plan.overview.endDate = overviewEndDate.value;
+                tripData.plan.overview.budget = overviewBudget.value;
+                tripData.plan.overview.notes = overviewNotes.value;
+                tripData.destination = overviewDestination.value || tripData.destination;
+                tripData.country = overviewCountry.value || tripData.country;
+                tripData.startDate = overviewStartDate.value || tripData.startDate;
+                tripData.endDate = overviewEndDate.value || tripData.endDate;
+                tripData.budget = overviewBudget.value || tripData.budget;
+                tripData.notes = overviewNotes.value || tripData.notes;
+                tripData.status = planStatus.value;
+            }
+
+            // Save everything
+            function saveAll() {
+                saveOverview();
+                userData.trips[tripIndex] = tripData;
+                localStorage.setItem(userDataKey, JSON.stringify(userData));
+                const saveBtn = document.getElementById('planSaveBtn');
+                saveBtn.classList.add('saved');
+                setTimeout(function() {
+                    saveBtn.classList.remove('saved');
+                }, 2000);
+            }
+
+            // ================================================================
+            // ITINERARY FUNCTIONS
+            // ================================================================
+
+            function renderItinerary() {
+                const days = tripData.plan.days || [];
+                if (days.length === 0) {
+                    itineraryContainer.innerHTML = `
+                        <div class="empty-state" style="padding:30px 20px;">
+                            <p style="color:#7A7A8E; font-size:0.9rem;">No days planned yet. Click "Add Day" to start building your itinerary.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let html = '';
+                days.forEach(function(day, index) {
+                    html += `
+                        <div class="day-card" data-index="${index}">
+                            <div class="day-header">
+                                <h3>Day ${index + 1}</h3>
+                                <div class="day-date">
+                                    <input type="date" class="day-date-input" value="${day.date || ''}" data-index="${index}" />
+                                </div>
+                                <div class="day-actions">
+                                    <button class="move-day-up" data-index="${index}" title="Move up"><i class="fas fa-chevron-up"></i></button>
+                                    <button class="move-day-down" data-index="${index}" title="Move down"><i class="fas fa-chevron-down"></i></button>
+                                    <button class="delete-day" data-index="${index}" title="Delete"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="day-grid">
+                                <div class="day-field day-full">
+                                    <label>Morning</label>
+                                    <input type="text" class="day-morning" value="${day.morning || ''}" placeholder="Morning activity..." data-index="${index}" />
+                                </div>
+                                <div class="day-field day-full">
+                                    <label>Afternoon</label>
+                                    <input type="text" class="day-afternoon" value="${day.afternoon || ''}" placeholder="Afternoon activity..." data-index="${index}" />
+                                </div>
+                                <div class="day-field day-full">
+                                    <label>Evening</label>
+                                    <input type="text" class="day-evening" value="${day.evening || ''}" placeholder="Evening activity..." data-index="${index}" />
+                                </div>
+                                <div class="day-field day-full">
+                                    <label>Meals</label>
+                                    <div class="day-meals">
+                                        <input type="text" class="day-breakfast" value="${day.meals ? day.meals.breakfast || '' : ''}" placeholder="Breakfast" data-index="${index}" />
+                                        <input type="text" class="day-lunch" value="${day.meals ? day.meals.lunch || '' : ''}" placeholder="Lunch" data-index="${index}" />
+                                        <input type="text" class="day-dinner" value="${day.meals ? day.meals.dinner || '' : ''}" placeholder="Dinner" data-index="${index}" />
+                                    </div>
+                                </div>
+                                <div class="day-field day-full">
+                                    <label>Notes</label>
+                                    <textarea class="day-notes" rows="1" placeholder="Notes for this day..." data-index="${index}">${day.notes || ''}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                itineraryContainer.innerHTML = html;
+
+                // Event listeners for day fields
+                document.querySelectorAll('.day-date-input').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.days[index].date = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.day-morning').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.days[index].morning = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.day-afternoon').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.days[index].afternoon = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.day-evening').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.days[index].evening = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.day-breakfast').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        if (!tripData.plan.days[index].meals) {
+                            tripData.plan.days[index].meals = {};
+                        }
+                        tripData.plan.days[index].meals.breakfast = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.day-lunch').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        if (!tripData.plan.days[index].meals) {
+                            tripData.plan.days[index].meals = {};
+                        }
+                        tripData.plan.days[index].meals.lunch = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.day-dinner').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        if (!tripData.plan.days[index].meals) {
+                            tripData.plan.days[index].meals = {};
+                        }
+                        tripData.plan.days[index].meals.dinner = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.day-notes').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.days[index].notes = this.value;
+                        saveAll();
+                    });
+                });
+
+                // Delete day
+                document.querySelectorAll('.delete-day').forEach(function(el) {
+                    el.addEventListener('click', function() {
+                        const index = parseInt(this.dataset.index);
+                        if (confirm('Delete this day?')) {
+                            tripData.plan.days.splice(index, 1);
+                            saveAll();
+                            renderItinerary();
+                        }
+                    });
+                });
+
+                // Move day up
+                document.querySelectorAll('.move-day-up').forEach(function(el) {
+                    el.addEventListener('click', function() {
+                        const index = parseInt(this.dataset.index);
+                        if (index > 0) {
+                            const temp = tripData.plan.days[index];
+                            tripData.plan.days[index] = tripData.plan.days[index - 1];
+                            tripData.plan.days[index - 1] = temp;
+                            saveAll();
+                            renderItinerary();
+                        }
+                    });
+                });
+
+                // Move day down
+                document.querySelectorAll('.move-day-down').forEach(function(el) {
+                    el.addEventListener('click', function() {
+                        const index = parseInt(this.dataset.index);
+                        if (index < tripData.plan.days.length - 1) {
+                            const temp = tripData.plan.days[index];
+                            tripData.plan.days[index] = tripData.plan.days[index + 1];
+                            tripData.plan.days[index + 1] = temp;
+                            saveAll();
+                            renderItinerary();
+                        }
+                    });
+                });
+            }
+
+            // Add day
+            document.getElementById('addDayBtn').addEventListener('click', function() {
+                const newDay = {
+                    date: '',
+                    morning: '',
+                    afternoon: '',
+                    evening: '',
+                    meals: {
+                        breakfast: '',
+                        lunch: '',
+                        dinner: ''
+                    },
+                    notes: ''
+                };
+                tripData.plan.days.push(newDay);
+                saveAll();
+                renderItinerary();
+            });
+
+            // ================================================================
+            // ACCOMMODATION FUNCTIONS
+            // ================================================================
+
+            function renderAccommodation() {
+                const items = tripData.plan.accommodation || [];
+                if (items.length === 0) {
+                    accommodationContainer.innerHTML = `
+                        <div class="empty-state" style="padding:30px 20px;">
+                            <p style="color:#7A7A8E; font-size:0.9rem;">No accommodation added yet. Click "Add Hotel" to get started.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let html = '';
+                items.forEach(function(item, index) {
+                    html += `
+                        <div class="item-card" data-index="${index}">
+                            <div class="item-header">
+                                <h4>${item.name || 'Hotel ' + (index + 1)}</h4>
+                                <div class="item-actions">
+                                    <button class="delete-accommodation" data-index="${index}"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="item-grid">
+                                <div class="item-field">
+                                    <label>Hotel Name</label>
+                                    <input type="text" class="acc-name" value="${item.name || ''}" data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>Address</label>
+                                    <input type="text" class="acc-address" value="${item.address || ''}" data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>Check In</label>
+                                    <input type="date" class="acc-checkin" value="${item.checkIn || ''}" data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>Check Out</label>
+                                    <input type="date" class="acc-checkout" value="${item.checkOut || ''}" data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>Price (per night)</label>
+                                    <input type="text" class="acc-price" value="${item.price || ''}" placeholder="e.g. R850" data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>Booking Reference</label>
+                                    <input type="text" class="acc-reference" value="${item.reference || ''}" placeholder="e.g. ABC123" data-index="${index}" />
+                                </div>
+                                <div class="item-field item-full">
+                                    <label>Notes</label>
+                                    <textarea class="acc-notes" rows="1" placeholder="Notes about this accommodation..." data-index="${index}">${item.notes || ''}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                accommodationContainer.innerHTML = html;
+
+                // Event listeners
+                document.querySelectorAll('.acc-name').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.accommodation[index].name = this.value;
+                        saveAll();
+                        renderAccommodation();
+                    });
+                });
+
+                document.querySelectorAll('.acc-address').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.accommodation[index].address = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.acc-checkin').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.accommodation[index].checkIn = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.acc-checkout').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.accommodation[index].checkOut = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.acc-price').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.accommodation[index].price = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.acc-reference').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.accommodation[index].reference = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.acc-notes').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.accommodation[index].notes = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.delete-accommodation').forEach(function(el) {
+                    el.addEventListener('click', function() {
+                        const index = parseInt(this.dataset.index);
+                        if (confirm('Delete this accommodation?')) {
+                            tripData.plan.accommodation.splice(index, 1);
+                            saveAll();
+                            renderAccommodation();
+                        }
+                    });
+                });
+            }
+
+            document.getElementById('addAccommodationBtn').addEventListener('click', function() {
+                tripData.plan.accommodation.push({
+                    name: '',
+                    address: '',
+                    checkIn: '',
+                    checkOut: '',
+                    price: '',
+                    reference: '',
+                    notes: ''
+                });
+                saveAll();
+                renderAccommodation();
+            });
+
+            // ================================================================
+            // TRANSPORT FUNCTIONS
+            // ================================================================
+
+            function renderTransport() {
+                const items = tripData.plan.transport || [];
+                if (items.length === 0) {
+                    transportContainer.innerHTML = `
+                        <div class="empty-state" style="padding:30px 20px;">
+                            <p style="color:#7A7A8E; font-size:0.9rem;">No transport added yet. Click "Add Transport" to get started.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let html = '';
+                items.forEach(function(item, index) {
+                    html += `
+                        <div class="item-card" data-index="${index}">
+                            <div class="item-header">
+                                <h4>${item.type || 'Transport'} ${index + 1}</h4>
+                                <div class="item-actions">
+                                    <button class="delete-transport" data-index="${index}"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="item-grid">
+                                <div class="item-field">
+                                    <label>Type</label>
+                                    <select class="trans-type" data-index="${index}">
+                                        <option value="Flight" ${item.type === 'Flight' ? 'selected' : ''}>Flight</option>
+                                        <option value="Train" ${item.type === 'Train' ? 'selected' : ''}>Train</option>
+                                        <option value="Bus" ${item.type === 'Bus' ? 'selected' : ''}>Bus</option>
+                                        <option value="Car Rental" ${item.type === 'Car Rental' ? 'selected' : ''}>Car Rental</option>
+                                        <option value="Ferry" ${item.type === 'Ferry' ? 'selected' : ''}>Ferry</option>
+                                    </select>
+                                </div>
+                                <div class="item-field">
+                                    <label>Company</label>
+                                    <input type="text" class="trans-company" value="${item.company || ''}" placeholder="Airline, train company..." data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>From</label>
+                                    <input type="text" class="trans-from" value="${item.from || ''}" placeholder="Departure city" data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>To</label>
+                                    <input type="text" class="trans-to" value="${item.to || ''}" placeholder="Arrival city" data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>Departure</label>
+                                    <input type="datetime-local" class="trans-departure" value="${item.departure || ''}" data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>Arrival</label>
+                                    <input type="datetime-local" class="trans-arrival" value="${item.arrival || ''}" data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>Reference</label>
+                                    <input type="text" class="trans-reference" value="${item.reference || ''}" placeholder="Booking reference" data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>Price</label>
+                                    <input type="text" class="trans-price" value="${item.price || ''}" placeholder="e.g. R6,500" data-index="${index}" />
+                                </div>
+                                <div class="item-field item-full">
+                                    <label>Notes</label>
+                                    <textarea class="trans-notes" rows="1" placeholder="Notes about this transport..." data-index="${index}">${item.notes || ''}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                transportContainer.innerHTML = html;
+
+                // Event listeners
+                document.querySelectorAll('.trans-type').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.transport[index].type = this.value;
+                        saveAll();
+                        renderTransport();
+                    });
+                });
+
+                document.querySelectorAll('.trans-company').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.transport[index].company = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.trans-from').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.transport[index].from = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.trans-to').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.transport[index].to = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.trans-departure').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.transport[index].departure = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.trans-arrival').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.transport[index].arrival = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.trans-reference').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.transport[index].reference = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.trans-price').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.transport[index].price = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.trans-notes').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.transport[index].notes = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.delete-transport').forEach(function(el) {
+                    el.addEventListener('click', function() {
+                        const index = parseInt(this.dataset.index);
+                        if (confirm('Delete this transport entry?')) {
+                            tripData.plan.transport.splice(index, 1);
+                            saveAll();
+                            renderTransport();
+                        }
+                    });
+                });
+            }
+
+            document.getElementById('addTransportBtn').addEventListener('click', function() {
+                tripData.plan.transport.push({
+                    type: 'Flight',
+                    company: '',
+                    from: '',
+                    to: '',
+                    departure: '',
+                    arrival: '',
+                    reference: '',
+                    price: '',
+                    notes: ''
+                });
+                saveAll();
+                renderTransport();
+            });
+
+            // ================================================================
+            // ACTIVITIES FUNCTIONS
+            // ================================================================
+
+            function renderActivities() {
+                const items = tripData.plan.activities || [];
+                if (items.length === 0) {
+                    activitiesContainer.innerHTML = `
+                        <div class="empty-state" style="padding:30px 20px;">
+                            <p style="color:#7A7A8E; font-size:0.9rem;">No activities added yet. Click "Add Activity" to get started.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let html = '';
+                items.forEach(function(item, index) {
+                    html += `
+                        <div class="item-card" data-index="${index}">
+                            <div class="item-header">
+                                <h4>${item.name || 'Activity ' + (index + 1)}</h4>
+                                <div class="item-actions">
+                                    <button class="delete-activity" data-index="${index}"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="item-grid">
+                                <div class="item-field">
+                                    <label>Activity Name</label>
+                                    <input type="text" class="act-name" value="${item.name || ''}" placeholder="Activity name" data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>Location</label>
+                                    <input type="text" class="act-location" value="${item.location || ''}" placeholder="Where is this?" data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>Date</label>
+                                    <input type="date" class="act-date" value="${item.date || ''}" data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>Time</label>
+                                    <input type="time" class="act-time" value="${item.time || ''}" data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>Price</label>
+                                    <input type="text" class="act-price" value="${item.price || ''}" placeholder="e.g. R400" data-index="${index}" />
+                                </div>
+                                <div class="item-field">
+                                    <label>Reference</label>
+                                    <input type="text" class="act-reference" value="${item.reference || ''}" placeholder="Booking reference" data-index="${index}" />
+                                </div>
+                                <div class="item-field item-full">
+                                    <label>Notes</label>
+                                    <textarea class="act-notes" rows="1" placeholder="Notes about this activity..." data-index="${index}">${item.notes || ''}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                activitiesContainer.innerHTML = html;
+
+                document.querySelectorAll('.act-name').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.activities[index].name = this.value;
+                        saveAll();
+                        renderActivities();
+                    });
+                });
+
+                document.querySelectorAll('.act-location').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.activities[index].location = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.act-date').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.activities[index].date = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.act-time').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.activities[index].time = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.act-price').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.activities[index].price = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.act-reference').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.activities[index].reference = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.act-notes').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const index = parseInt(this.dataset.index);
+                        tripData.plan.activities[index].notes = this.value;
+                        saveAll();
+                    });
+                });
+
+                document.querySelectorAll('.delete-activity').forEach(function(el) {
+                    el.addEventListener('click', function() {
+                        const index = parseInt(this.dataset.index);
+                        if (confirm('Delete this activity?')) {
+                            tripData.plan.activities.splice(index, 1);
+                            saveAll();
+                            renderActivities();
+                        }
+                    });
+                });
+            }
+
+            document.getElementById('addActivityBtn').addEventListener('click', function() {
+                tripData.plan.activities.push({
+                    name: '',
+                    location: '',
+                    date: '',
+                    time: '',
+                    price: '',
+                    reference: '',
+                    notes: ''
+                });
+                saveAll();
+                renderActivities();
+            });
+
+            // ================================================================
+            // PACKING FUNCTIONS
+            // ================================================================
+
+            function renderPacking() {
+                const items = tripData.plan.packing || [];
+                const categories = ['Essentials', 'Clothes', 'Toiletries', 'Documents', 'Electronics', 'Other'];
+
+                let html = '';
+                categories.forEach(function(category) {
+                    const categoryItems = items.filter(function(item) {
+                        return item.category === category;
+                    });
+
+                    if (categoryItems.length > 0) {
+                        html += `
+                            <div class="packing-category">
+                                <h4>${category}</h4>
+                                <div class="packing-items">
+                        `;
+                        categoryItems.forEach(function(item) {
+                            html += `
+                                <div class="packing-item ${item.packed ? 'packed' : ''}">
+                                    <input type="checkbox" class="pack-checkbox" data-id="${item.id}" ${item.packed ? 'checked' : ''} />
+                                    <label>${item.item}</label>
+                                    <button class="remove-item" data-id="${item.id}"><i class="fas fa-times"></i></button>
+                                </div>
+                            `;
+                        });
+                        html += `
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                // Add form
+                html += `
+                    <div class="packing-add">
+                        <input type="text" id="newPackingItem" placeholder="Item name..." />
+                        <select id="newPackingCategory">
+                            <option value="Essentials">Essentials</option>
+                            <option value="Clothes">Clothes</option>
+                            <option value="Toiletries">Toiletries</option>
+                            <option value="Documents">Documents</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <button class="add-item-btn" id="addPackingBtn"><i class="fas fa-plus"></i> Add</button>
+                    </div>
+                `;
+
+                packingContainer.innerHTML = html;
+
+                document.querySelectorAll('.pack-checkbox').forEach(function(el) {
+                    el.addEventListener('change', function() {
+                        const id = this.dataset.id;
+                        const item = tripData.plan.packing.find(function(p) {
+                            return p.id === id;
+                        });
+                        if (item) {
+                            item.packed = this.checked;
+                            saveAll();
+                            renderPacking();
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.remove-item').forEach(function(el) {
+                    el.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        const index = tripData.plan.packing.findIndex(function(p) {
+                            return p.id === id;
+                        });
+                        if (index > -1) {
+                            tripData.plan.packing.splice(index, 1);
+                            saveAll();
+                            renderPacking();
+                        }
+                    });
+                });
+
+                document.getElementById('addPackingBtn').addEventListener('click', function() {
+                    const input = document.getElementById('newPackingItem');
+                    const category = document.getElementById('newPackingCategory').value;
+                    if (input.value.trim()) {
+                        tripData.plan.packing.push({
+                            id: 'pack_' + Date.now(),
+                            item: input.value.trim(),
+                            category: category,
+                            packed: false
+                        });
+                        saveAll();
+                        input.value = '';
+                        renderPacking();
+                    }
+                });
+
+                document.getElementById('newPackingItem').addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        document.getElementById('addPackingBtn').click();
+                    }
+                });
+            }
+
+            // ================================================================
+            // BUDGET FUNCTIONS
+            // ================================================================
+
+            function renderBudget() {
+                const expenses = tripData.plan.expenses || [];
+                const totalBudget = parseFloat(overviewBudget.value.replace(/[^0-9.]/g, '')) || 0;
+                const totalSpent = expenses.reduce(function(sum, e) {
+                    const amount = parseFloat(e.amount) || 0;
+                    return sum + amount;
+                }, 0);
+                const remaining = totalBudget - totalSpent;
+                const percentUsed = totalBudget > 0 ? (totalSpent / totalBudget) * 100 : 0;
+
+                let colorClass = 'green';
+                if (percentUsed > 80) colorClass = 'coral';
+                else if (percentUsed > 60) colorClass = 'mustard';
+
+                let html = `
+                    <div class="budget-summary">
+                        <div class="budget-item">
+                            <span class="amount">R${totalBudget.toFixed(0)}</span>
+                            <span class="label">Total Budget</span>
+                        </div>
+                        <div class="budget-item">
+                            <span class="amount coral">R${totalSpent.toFixed(0)}</span>
+                            <span class="label">Spent</span>
+                        </div>
+                        <div class="budget-item">
+                            <span class="amount green">R${remaining.toFixed(0)}</span>
+                            <span class="label">Remaining</span>
+                        </div>
+                    </div>
+                    <div class="budget-bar">
+                        <div class="budget-fill ${colorClass}" style="width: ${Math.min(percentUsed, 100)}%;"></div>
+                    </div>
+                `;
+
+                if (expenses.length > 0) {
+                    html += `<div class="budget-expenses">`;
+                    expenses.forEach(function(expense, index) {
+                        html += `
+                            <div class="budget-expense">
+                                <div class="expense-left">
+                                    <span class="category">${expense.category}</span>
+                                    <span class="description">${expense.description || ''}</span>
+                                    <span style="font-size:0.7rem; color:#999;">${expense.date || ''}</span>
+                                </div>
+                                <div class="expense-amount">R${parseFloat(expense.amount).toFixed(0)}</div>
+                                <div class="expense-actions">
+                                    <button class="delete-expense" data-index="${index}"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+                } else {
+                    html += `<p style="color:#7A7A8E; font-size:0.85rem; padding:10px 0;">No expenses recorded yet.</p>`;
+                }
+
+                // Add expense form
+                html += `
+                    <div class="budget-add">
+                        <select id="expenseCategory">
+                            <option value="Accommodation">Accommodation</option>
+                            <option value="Food">Food</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Activities">Activities</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Miscellaneous">Miscellaneous</option>
+                        </select>
+                        <input type="text" id="expenseDescription" placeholder="Description..." />
+                        <input type="number" id="expenseAmount" placeholder="Amount" step="0.01" />
+                        <input type="date" id="expenseDate" />
+                        <button class="add-expense-btn" id="addExpenseBtn"><i class="fas fa-plus"></i> Add</button>
+                    </div>
+                `;
+
+                budgetContainer.innerHTML = html;
+
+                // Set default date
+                const dateInput = document.getElementById('expenseDate');
+                if (dateInput) {
+                    dateInput.value = new Date().toISOString().split('T')[0];
+                }
+
+                document.getElementById('addExpenseBtn').addEventListener('click', function() {
+                    const category = document.getElementById('expenseCategory').value;
+                    const description = document.getElementById('expenseDescription').value.trim();
+                    const amount = document.getElementById('expenseAmount').value;
+                    const date = document.getElementById('expenseDate').value;
+
+                    if (!amount) {
+                        alert('Please enter an amount');
+                        return;
+                    }
+
+                    tripData.plan.expenses.push({
+                        category: category,
+                        description: description,
+                        amount: amount,
+                        date: date || new Date().toISOString().split('T')[0]
+                    });
+
+                    saveAll();
+                    renderBudget();
+                });
+
+                document.querySelectorAll('.delete-expense').forEach(function(el) {
+                    el.addEventListener('click', function() {
+                        const index = parseInt(this.dataset.index);
+                        if (confirm('Delete this expense?')) {
+                            tripData.plan.expenses.splice(index, 1);
+                            saveAll();
+                            renderBudget();
+                        }
+                    });
+                });
+            }
+
+            // ================================================================
+            // JOURNAL FUNCTIONS
+            // ================================================================
+
+            function renderJournal() {
+                const entries = tripData.plan.journal || [];
+
+                let html = '';
+
+                if (entries.length > 0) {
+                    // Show entries from newest to oldest
+                    const sortedEntries = [...entries].reverse();
+                    sortedEntries.forEach(function(entry) {
+                        html += `
+                            <div class="journal-entry">
+                                <div class="journal-date">${entry.date || ''}</div>
+                                <div class="journal-text">${entry.entry || ''}</div>
+                                <div class="journal-actions">
+                                    <button class="delete-journal" data-date="${entry.date}"><i class="fas fa-trash"></i> Delete</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                } else {
+                    html += `<p style="color:#7A7A8E; font-size:0.85rem; padding:10px 0;">No journal entries yet. Start writing about your trip!</p>`;
+                }
+
+                html += `
+                    <div class="journal-add">
+                        <textarea id="journalEntry" placeholder="Write your journal entry here..."></textarea>
+                        <button class="add-journal-btn" id="addJournalBtn"><i class="fas fa-plus"></i> Add Entry</button>
+                    </div>
+                `;
+
+                journalContainer.innerHTML = html;
+
+                document.getElementById('addJournalBtn').addEventListener('click', function() {
+                    const entryText = document.getElementById('journalEntry').value.trim();
+                    if (!entryText) {
+                        alert('Please write something');
+                        return;
+                    }
+
+                    const today = new Date().toISOString().split('T')[0];
+                    const dateFormatted = new Date().toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+
+                    tripData.plan.journal.push({
+                        date: dateFormatted,
+                        entry: entryText
+                    });
+
+                    saveAll();
+                    document.getElementById('journalEntry').value = '';
+                    renderJournal();
+                });
+
+                document.querySelectorAll('.delete-journal').forEach(function(el) {
+                    el.addEventListener('click', function() {
+                        const date = this.dataset.date;
+                        const index = tripData.plan.journal.findIndex(function(j) {
+                            return j.date === date;
+                        });
+                        if (index > -1) {
+                            if (confirm('Delete this journal entry?')) {
+                                tripData.plan.journal.splice(index, 1);
+                                saveAll();
+                                renderJournal();
+                            }
+                        }
+                    });
+                });
+            }
+
+            // ================================================================
+            // SIDEBAR NAVIGATION
+            // ================================================================
+
+            document.querySelectorAll('.plan-sidebar-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.plan-sidebar-btn').forEach(function(b) {
+                        b.classList.remove('active');
+                    });
+                    this.classList.add('active');
+
+                    const section = this.dataset.section;
+                    document.querySelectorAll('.plan-section').forEach(function(s) {
+                        s.classList.remove('active');
+                    });
+                    const targetSection = document.getElementById('section' + section.charAt(0).toUpperCase() + section.slice(1));
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    }
+                });
+            });
+
+            // ================================================================
+            // SAVE BUTTON
+            // ================================================================
+
+            document.getElementById('planSaveBtn').addEventListener('click', function() {
+                saveAll();
+                alert('Trip saved successfully!');
+            });
+
+            // Auto-save on status change
+            planStatus.addEventListener('change', function() {
+                tripData.status = this.value;
+                saveAll();
+            });
+
+            // ================================================================
+            // INITIALIZE
+            // ================================================================
+
+            populateOverview();
+            renderItinerary();
+            renderAccommodation();
+            renderTransport();
+            renderActivities();
+            renderPacking();
+            renderBudget();
+            renderJournal();
+
+            // Auto-save every 30 seconds
+            setInterval(saveAll, 30000);
+
+        });
+    </script>
+
+</body>
+</html>
