@@ -61,3 +61,21 @@ Organize Your Packing List
 * CSS
 * JavaScript
 * Local Storage
+---
+
+## Challenges
+
+* Managing application state without a backend.
+* Designing an intuitive trip planning workflow.
+* Persisting user data using Local Storage.
+* Building reusable and responsive UI components.
+---
+
+## Possible  Future Improvements
+
+* Live weather forecasts
+* Interactive maps
+* Currency conversion
+* Flight and accommodation API integration
+* AI-powered itinerary suggestions
+---
