@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Explore Destinations - TripCraft</title>
+    <title>TripCraft</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,25 +12,7 @@
 </head>
 <body>
 
-    <nav class="navbar" id="navbar">
-        <a href="index.html" class="nav-logo">
-            <i class="fas fa-paper-plane"></i> TripCraft
-        </a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="destinations.html">Explore</a></li>
-            <li><a href="index.html#why">About</a></li>
-            <li><a href="index.html#footer">Contact</a></li>
-            <li class="nav-auth" id="navAuth">
-                <!-- DYNAMICALLY UPDATED BY JAVASCRIPT -->
-            </li>
-        </ul>
-        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </nav>
+    <div id="navbar"></div>
 
     <section class="page-header">
         <div class="container">
@@ -104,7 +86,7 @@
                         </div>
                     </div>
                     <div class="dest-grid" id="destGrid"></div>
-                    <div class="no-results" id="noResults" style="display:none;">
+                    <div class="no-results" id="noResults">
                         <i class="fas fa-map-marked-alt"></i>
                         <h3>No destinations found</h3>
                         <p>Try adjusting your filters</p>
@@ -114,30 +96,21 @@
         </div>
     </section>
 
-    <!-- MODAL -->
     <div class="modal" id="detailModal">
         <div class="modal-overlay"></div>
         <div class="modal-content">
             <button class="modal-close">&times;</button>
-            
             <div class="modal-scrapbook">
-                
-                <!-- LEFT COLUMN - PHOTOS + TAGS -->
                 <div class="modal-left">
-                    
                     <div class="modal-photo photo-top">
                         <img src="" alt="" id="modalImg1" />
                     </div>
-                    
                     <div class="modal-photo photo-middle">
                         <img src="" alt="" id="modalImg2" />
                     </div>
-                    
                     <div class="modal-photo photo-bottom">
                         <img src="" alt="" id="modalImg3" />
                     </div>
-                    
-                    <!-- TAGS SCATTERED UNDER IMAGES -->
                     <div class="modal-tags-under">
                         <span class="scrap-tag tag-flight" id="modalTag1">Flight: 14hr</span>
                         <span class="scrap-tag tag-timezone" id="modalTag2">Time Zone: UTC+9</span>
@@ -146,112 +119,41 @@
                         <span class="scrap-tag tag-population" id="modalTag4">Population: 14 million</span>
                         <div id="modalSeasonsTag" class="modal-seasons-tag-container"></div>
                     </div>
-                    
                 </div>
-                
-                <!-- RIGHT COLUMN - INFORMATION -->
                 <div class="modal-right">
-                    
-                    <!-- Destination Name -->
                     <div class="modal-name-block">
                         <div class="torn-tape"></div>
                         <h2><span class="highlight" id="modalCountry">Tokyo</span></h2>
                         <span id="modalContinent" class="modal-continent">Japan · ASIA</span>
                         <span class="modal-details" id="modalDetails">Capital: Tokyo · Language: Japanese</span>
                     </div>
-                    
-                    <!-- Description -->
                     <div class="modal-description">
                         <p id="modalDescription">Tokyo is where ancient temples meet neon towers...</p>
                     </div>
-                    
-                    <!-- Cards Row -->
                     <div class="modal-cards-row">
-                        
-                        <!-- See Card -->
                         <div class="scrap-card card-see">
                             <div class="card-pin"></div>
-                            <div class="card-header">
-                                <h3>See</h3>
-                            </div>
+                            <div class="card-header"><h3>See</h3></div>
                             <ul id="modalAttractions"></ul>
                         </div>
-                        
-                        <!-- Eat Card -->
                         <div class="scrap-card card-eat">
                             <div class="card-pin"></div>
-                            <div class="card-header">
-                                <h3>Eat</h3>
-                            </div>
+                            <div class="card-header"><h3>Eat</h3></div>
                             <ul id="modalCuisine"></ul>
                         </div>
-                        
                     </div>
-                    
-                    <!-- Tips Card -->
                     <div class="scrap-card card-tips">
                         <div class="card-pin"></div>
-                        <div class="card-header">
-                            <h3>Tips</h3>
-                        </div>
+                        <div class="card-header"><h3>Tips</h3></div>
                         <ul id="modalTips"></ul>
                     </div>
-                    
                 </div>
-                
             </div>
-            
-            <!-- Plan Button -->
-            <button class="plan-btn" data-dest-id="">
-                <i class="fas fa-paper-plane"></i> Plan This Trip
-            </button>
-            
+            <button class="plan-btn" data-dest-id=""><i class="fas fa-paper-plane"></i> Plan This Trip</button>
         </div>
     </div>
 
-    <footer class="footer" id="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <h3><i class="fas fa-paper-plane"></i> TripCraft</h3>
-                    <p>Your personal travel journal — plan your adventures, organize your trips, and keep all your travel memories in one beautiful place.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Explore</h4>
-                    <ul>
-                        <li><a href="destinations.html">Destinations</a></li>
-                        <li><a href="index.html#travelstyles">Travel Styles</a></li>
-                        <li><a href="trip.html">Trip Planner</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="index.html#why">About</a></li>
-                        <li><a href="#footer">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Get in Touch</h4>
-                    <div class="contact-item">
-                        <i class="fas fa-map-pin"></i>
-                        <span>123 Traveler's Lane</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>hello@tripcraft.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+27 63 123 4567</span>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <span><i class="far fa-copyright"></i> 2026 Lorraine.</span>
-            </div>
-        </div>
-    </footer>
+    <div id="footer"></div>
 
     <script src="js/script.js"></script>
 </body>
